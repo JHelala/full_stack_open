@@ -13,13 +13,25 @@ const Statistics = (props) => {
 
   return (
     <div>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>All: {all}</p>
-      <p>Average: {average.toFixed(2)}</p>
-      <p>Positive: {positive.toFixed(2)} %</p>
+      <StatisticLine text="Good" value={good} />
+      <StatisticLine text="Neutral" value={neutral} />
+      <StatisticLine text="Bad" value={bad} />
+      <StatisticLine text="All" value={all} />
+      <StatisticLine text="Average" value={average.toFixed(2)} />
+      <StatisticLine text="Positive" value={`${positive.toFixed(2)} %`} />
     </div>
+  )
+}
+
+const Button = (props) => {
+  const { onClick, text } = props
+  return <button onClick={onClick}>{text}</button>
+}
+
+const StatisticLine = (props) => {
+  const { text, value } = props
+  return (
+    <p>{text}: {value}</p>
   )
 }
 
@@ -34,9 +46,9 @@ const App = () => {
       <h1>Give feedback</h1>
 
       {/* Would need to add a thing so that you can't give multiple feedbacks if put to proper use */}
-      <button onClick={() => setGood(good + 1)}>good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>neutral</button>
-      <button onClick={() => setBad(bad + 1)}>bad</button>
+      <Button onClick={() => setGood(good + 1)} text="good" />
+      <Button onClick={() => setNeutral(neutral + 1)} text="neutral" />
+      <Button onClick={() => setBad(bad + 1)} text="bad" />
 
       <h1>Statistics</h1>
       <Statistics good={good} neutral={neutral} bad={bad} />
